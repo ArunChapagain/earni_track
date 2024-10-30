@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 class EarningsData {
   final DateTime priceDate;
   final String ticker;
@@ -16,8 +14,6 @@ class EarningsData {
     required this.actualRevenue,
     required this.estimatedRevenue,
   });
-  factory EarningsData.fromJson(String str) =>
-      EarningsData.fromMap(json.decode(str));
 
   factory EarningsData.fromMap(Map<String, dynamic> json) {
     return EarningsData(

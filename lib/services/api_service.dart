@@ -20,11 +20,13 @@ class ApiService {
         'earningscalendar',
         queryParameters: {'ticker': ticker},
       );
-
       if (response.statusCode == 200) {
         return (response.data as List)
-            .map((item) => EarningsData.fromJson(item))
+            .map((item) => EarningsData.fromMap(item))
             .toList();
+        // return (response.data as List)
+        //     .map((item) => EarningsData.fromJson(item))
+        //     .toList();
       } else {
         throw DioException(
           requestOptions: RequestOptions(path: ''),
@@ -32,6 +34,7 @@ class ApiService {
         );
       }
     } catch (e) {
+      print(e);
       throw DioException(
         requestOptions: RequestOptions(path: ''),
         error: 'Error: ${e.toString()}',
@@ -39,18 +42,37 @@ class ApiService {
     }
   }
 
+  /// Converts date string to year and quarter
+  Map<String, String> _getYearAndQuarter(String date) {
+    final DateTime dateTime = DateTime.parse(date);
+    final String year = dateTime.year.toString();
+
+    // Calculate quarter (1-4) based on month
+    final int month = dateTime.month;
+    final int quarter = ((month - 1) ~/ 3) + 1;
+
+    return {
+      'year': year,
+      'quarter': quarter.toString(),
+    };
+  }
+
   Future<TranscriptData> getTranscript(String ticker, String date) async {
     try {
+      // Convert date to year and quarter
+      final yearQuarter = _getYearAndQuarter(date);
+
       final response = await _dio.get(
-        'earningscalltranscript',
+        'earningstranscript',
         queryParameters: {
           'ticker': ticker,
-          'date': date,
+          'year': yearQuarter['year'],
+          'quarter': yearQuarter['quarter'],
         },
       );
 
       if (response.statusCode == 200) {
-        return TranscriptData.fromJson(response.data);
+        return TranscriptData.fromMap(response.data);
       } else {
         throw DioException(
           requestOptions: RequestOptions(path: ''),

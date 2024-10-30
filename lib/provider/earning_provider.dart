@@ -49,3 +49,5 @@ class EarningsProvider with ChangeNotifier {
     }
   }
 }
+
+
