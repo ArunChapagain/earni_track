@@ -19,6 +19,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void dispose() {
+    _controller.clear();
     _controller.dispose();
     super.dispose();
   }
@@ -114,26 +115,6 @@ class _HomePageState extends State<HomePage> {
                     EarningsComparisonChart(
                       earningsData: earningsProvider.earningsData,
                       onDataPointSelected: (earningData) {
-                        // earningsProvider.fetchTranscript(
-                        //   earningsProvider.earningsData[0].ticker,
-                        //   DateFormat('yyyy-MM-dd').format(earningData.priceDate),
-                        // ).then((_) {
-                        //   Navigator.of(context).push(
-                        //     MaterialPageRoute(
-                        //       builder: (context) => EarningTranscriptScreen(
-                        //         earningsData: earningData,
-                        //       ),
-                        //     ),
-                        //   );
-                        // });
-                      },
-                    ),
-                  const SizedBox(height: 16),
-                  Transform.scale(
-                    scale: 1,
-                    child: EarningsChart(
-                      earningsData: earningsProvider.earningsData,
-                      onDataPointSelected: (earningData) {
                         // Fetch transcript when a data point is clicked
                         earningsProvider
                             .fetchTranscript(
@@ -152,7 +133,6 @@ class _HomePageState extends State<HomePage> {
                         });
                       },
                     ),
-                  ),
                   const SizedBox(height: 16),
                 ],
               ),

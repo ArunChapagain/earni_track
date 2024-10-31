@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-  String apiKey = 'f6loeisbutFwIp6YK1vHLw==dKjmYXO4wG5nXy9Y';
+  String apiKey = '';
   runApp(
     MultiProvider(
       providers: [

@@ -30,12 +30,24 @@ class EarningTranscriptScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(height: 10),
-                    const Text(
-                      'Earnings Transcript',
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        IconButton(
+                          icon: const Icon(Icons.arrow_back),
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                        ),
+                        SizedBox(width: 30),
+                        const Text(
+                          'Earnings Transcript',
+                          style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
                     ),
                     Card(
                       elevation: 4,
@@ -46,7 +58,7 @@ class EarningTranscriptScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Date: ${earningsData.priceDate}',
+                              'Date: ${DateFormat.yMMMMd().format(DateTime.parse(earningsData.priceDate.toIso8601String()))}',
                               style: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600,
@@ -54,6 +66,13 @@ class EarningTranscriptScreen extends StatelessWidget {
                             ),
                             Text(
                               'Ticker: ${earningsData.ticker}',
+                              style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            Text(
+                              'Quater: ${DateFormat.QQQ().format(DateTime.parse(earningsData.priceDate.toIso8601String()))}',
                               style: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600,
