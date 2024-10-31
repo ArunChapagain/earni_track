@@ -34,7 +34,6 @@ class ApiService {
         );
       }
     } catch (e) {
-      print(e);
       throw DioException(
         requestOptions: RequestOptions(path: ''),
         error: 'Error: ${e.toString()}',
