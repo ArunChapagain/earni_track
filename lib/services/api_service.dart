@@ -24,9 +24,6 @@ class ApiService {
         return (response.data as List)
             .map((item) => EarningsData.fromMap(item))
             .toList();
-        // return (response.data as List)
-        //     .map((item) => EarningsData.fromJson(item))
-        //     .toList();
       } else {
         throw DioException(
           requestOptions: RequestOptions(path: ''),

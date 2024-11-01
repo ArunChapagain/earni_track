@@ -1,7 +1,6 @@
 import 'package:earni_track/models/earnings_data.dart';
 import 'package:earni_track/provider/earning_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
@@ -16,7 +15,6 @@ class EarningTranscriptScreen extends StatefulWidget {
 
 class _EarningTranscriptScreenState extends State<EarningTranscriptScreen> {
   final ScrollController _scrollController = ScrollController();
-  double _scrollPosition = 0.0;
 
   @override
   void dispose() {
@@ -50,7 +48,7 @@ class _EarningTranscriptScreenState extends State<EarningTranscriptScreen> {
                     ),
                     onPressed: () => Navigator.pop(context),
                   ),
-                  title: Text(
+                  title: const Text(
                     'Earnings Transcript',
                     style: TextStyle(
                       color: Colors.black87,
@@ -244,8 +242,8 @@ class _EarningTranscriptScreenState extends State<EarningTranscriptScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: const EdgeInsets.all(20),
+          const Padding(
+            padding: EdgeInsets.all(20),
             child: Text(
               'Full Transcript',
               style: TextStyle(
@@ -266,7 +264,7 @@ class _EarningTranscriptScreenState extends State<EarningTranscriptScreen> {
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 child: Text(
                   transcript,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 16,
                     height: 1.6,
                     color: Colors.black87,

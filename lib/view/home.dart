@@ -1,3 +1,4 @@
+import 'package:earni_track/provider/network_connection_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
@@ -36,8 +37,8 @@ class _HomePageState extends State<HomePage> {
       ),
     );
 
-    return Consumer<EarningsProvider>(
-      builder: (context, earningsProvider, child) {
+    return Consumer2<EarningsProvider,NetworkCheckerProvider>(
+      builder: (context, earningsProvider, networkProvider,child) {
         return LoadingOverlay(
           isLoading: earningsProvider.isLoading,
           child: Scaffold(
@@ -160,7 +161,8 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                     ),
-                    if (earningsProvider.earningsData.isEmpty)
+                    
+                      if (earningsProvider.earningsData.isEmpty)
                       SliverToBoxAdapter(
                           child: Container(
                         clipBehavior: Clip.antiAlias,
