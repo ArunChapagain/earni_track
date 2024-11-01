@@ -1,7 +1,7 @@
 <h1 align="center"> 
   EarniTrack
 </h1> <p align="center">
-  <img alt="Preview1" src="./README/preview.png">
+  <img alt="Preview1" src="./README/preview1.png">
 </p>
 
 <br/>
