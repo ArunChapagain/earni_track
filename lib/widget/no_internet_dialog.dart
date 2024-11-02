@@ -9,11 +9,12 @@ class NoInternetDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: const Row(
+      title: Row(
         children: [
-          Icon(Icons.signal_wifi_off, color: Colors.red),
-          SizedBox(width: 8),
-          Text('No Internet Connection'),
+          Icon(Icons.signal_wifi_off, color: Colors.blue[900]),
+          const SizedBox(width: 8),
+          const Text('No Internet Connection',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
         ],
       ),
       content: const Column(
@@ -29,7 +30,8 @@ class NoInternetDialog extends StatelessWidget {
           onPressed: () {
             Navigator.of(context).pop();
           },
-          child: const Text('Dismiss'),
+          child: const Text('Dismiss',
+              style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold)),
         ),
         TextButton(
           onPressed: () async {
@@ -39,7 +41,9 @@ class NoInternetDialog extends StatelessWidget {
               Navigator.of(context).pop();
             }
           },
-          child: const Text('Retry'),
+          child: Text('Retry',
+              style: TextStyle(
+                  color: Colors.blue[900], fontWeight: FontWeight.bold)),
         ),
       ],
     );
@@ -51,29 +55,19 @@ class ConnectivityWrapper extends StatelessWidget {
 
   const ConnectivityWrapper({super.key, required this.child});
 
-  
-
   void _showNoInternetDialog(BuildContext context) {
-    final networkProvider =
-        Provider.of<NetworkCheckerProvider>(context, listen: false);
-    if (!networkProvider.hasShownDialog) {
-      networkProvider.setDialogShown(true);
-      showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (context) => const NoInternetDialog(),
-      );
-    }
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => const NoInternetDialog(),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    final networkProvider = Provider.of<NetworkCheckerProvider>(context);
-
-    return AnimatedBuilder(
-      animation: networkProvider,
-      builder: (context, _) {
-        if (networkProvider.status == InternetStatus.disconnected) {
+    return Consumer<NetworkCheckerProvider>(
+      builder: (context, networkProvider, _) {
+        if (!networkProvider.isConnected) {
           WidgetsBinding.instance.addPostFrameCallback((_) {
             _showNoInternetDialog(context);
           });
